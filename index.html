@@ -3,7 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>My Login Page</title>
-    <link rel="stylesheet" href="milestone2.css" />
+    <link rel="stylesheet" href="style.css" />
     <script
       src="https://kit.fontawesome.com/7c6d77fc63.js"
       crossorigin="anonymous"
@@ -13,17 +13,27 @@
     <div class="box">
       <div class="form">
         <span class="heading"><strong>Login</strong></span>
-        <form method="POST">
+        <form method="POST" id="form">
           <div class="fillin">
             <i class="fas fa-user"></i>
             <input type="text" name="username" placeholder="Username..." />
+          </div>
+          <div class="fillin">
+            <i class="fas fa-phone"></i>
+            <input
+              id="password"
+              type="number"
+              name="number"
+              placeholder="Phone number..."
+              min="1"
+            />
           </div>
           <div class="fillin">
             <i class="fas fa-lock"></i>
             <input type="password" name="password" placeholder="Password..." />
           </div>
           <div class="fillin">
-            <button>
+            <button id="submit">
               <i class="far fa-paper-plane"></i>
             </button>
           </div>
@@ -33,5 +43,27 @@
         </form>
       </div>
     </div>
+    <ul id="results"></ul>
+
+    <script>
+      const form = document.getElementById("form");
+      const input = document.getElementById("password");
+      const submitBtn = document.getElementById("submit");
+      const results = document.getElementById("results");
+      const submitHandler = function(event) {
+        event.preventDefault();
+        results.innerHTML = "";
+        for (let i = 1; i <= input.value; i++) {
+          let result = "";
+          if (i % 3 === 0) result += "Fizz";
+          if (i % 5 === 0) result += "Buzz";
+          if (i % 3 && i % 5) result += i;
+          const newLi = document.createElement("li");
+          newLi.innerText = result;
+          results.append(newLi);
+        }
+      };
+      submitBtn.onclick = submitHandler;
+    </script>
   </body>
 </html>
